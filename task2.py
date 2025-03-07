@@ -12,10 +12,16 @@ def insert_sort(i, j, arr, brr):
             return False
     return True
 
+def sort(arr):
+    for i in range(1, len(arr)):
+        while i>0 and arr[i] < arr[i-1]:
+            arr[i], arr[i-1] = arr[i-1], arr[i]
+            i -= 1
+
 
 def solve(arr: list):
     brr = arr.copy()
-    brr.sort()
+    sort(brr)
     ans = []
     start = -1
     end = -1
