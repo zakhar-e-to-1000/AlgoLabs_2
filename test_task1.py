@@ -15,6 +15,10 @@ class TestTask(unittest.TestCase):
     def test_one_element(self):
         arr = [1]
         self.assertEqual(solve(arr), (-1, -1))
+    
+    def test_teacher(self):
+        arr = [1, 2, 3, 6, 5, 7, 8, 9, 11, 10, 12, 13, 14]
+        self.assertEqual(solve(arr), (3, 9))
 
 
 if __name__ == '__main__':
