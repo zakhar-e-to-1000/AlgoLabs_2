@@ -5,6 +5,8 @@ from task1 import solve
 class TestTask(unittest.TestCase):
     def test_small(self):
         self.assertEqual(solve(10, 2, 3), 9)
+    def test_smal_2(self):
+        self.assertEqual(solve(17, 1, 8),16)
 
     def test_big(self):
         self.assertEqual(solve(2, 1000000000, 999999999), 1999999998)
