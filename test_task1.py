@@ -17,6 +17,11 @@ class Task1Test(unittest.TestCase):
         root.right = BinaryTree(4)
         self.assertEqual(solve(root), False)
 
+    def test_hollow(self):
+        root = BinaryTree(2)
+        root.left = BinaryTree(2)
+        root.left.left = BinaryTree(2)
+        self.assertEqual(solve(root), False)
 
 if __name__ == '__main__':
     unittest.main()
