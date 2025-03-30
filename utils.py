@@ -1,17 +1,18 @@
 class Node:
-    def __init__(self, val):
+    def __init__(self, val, prior):
         self.right = None
         self.left = None
         self.val = val
+        self.prior = prior
         self.height = 1
 
     def __str__(self):
-        return str(self.val)
+        return str(self.prior)
 
 
 def print_tree(root):
     curr_level = -1
-    next_level = [root.val]
+    next_level = [root.prior]
     node_que = [(root, 0, 0)]
     print_plan = []
     max_len = 0
@@ -26,10 +27,10 @@ def print_tree(root):
 
         if node.left != None:
             node_que.append((node.left, level+1, 2*right_adj))
-            next_level[2*right_adj] = node.left.val
+            next_level[2*right_adj] = node.left.prior
         if node.right != None:
             node_que.append((node.right, level+1, 2*right_adj+1))
-            next_level[2*right_adj+1] = node.right.val
+            next_level[2*right_adj+1] = node.right.prior
     for string in print_plan:
         print(string.center(max_len))
 
