@@ -12,7 +12,7 @@ class Node:
 
 def print_tree(root):
     curr_level = -1
-    next_level = [root.prior]
+    next_level = [str(root)]
     node_que = [(root, 0, 0)]
     print_plan = []
     max_len = 0
@@ -27,10 +27,10 @@ def print_tree(root):
 
         if node.left != None:
             node_que.append((node.left, level+1, 2*right_adj))
-            next_level[2*right_adj] = node.left.prior
+            next_level[2*right_adj] = str(node.left)
         if node.right != None:
             node_que.append((node.right, level+1, 2*right_adj+1))
-            next_level[2*right_adj+1] = node.right.prior
+            next_level[2*right_adj+1] = str(node.right)
     for string in print_plan:
         print(string.center(max_len))
 

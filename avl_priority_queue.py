@@ -122,11 +122,12 @@ def delete_specific(root, prior):
     granny = path[-1]
     if node.left == None:
         vars(granny)[sides[-1]] = node.right
-        return root
+        node = node.right
     if node.right == None:
         vars(granny)[sides[-1]] = node.left
-        return root
-    node.right, node.val, node.prior = delete_leftmost(node.right)
+        node = node.left
+    else:
+        node.right, node.val, node.prior = delete_leftmost(node.right)
     path.append(node)
     for i in range(len(path)-1, -1, -1):
         parent = path[i]
@@ -274,6 +275,8 @@ def main():
         print_tree(que.root)
         print()
     print(que.find(9376))
+    que.delete_specific(2121)
+    print_tree(que.root)
 
 
 if __name__ == '__main__':
