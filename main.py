@@ -7,7 +7,7 @@ def solve(size, r_start, c_start, r_end, c_end):
         raise IndexError
     if not valid_pos(r_end, c_end, size):
         raise IndexError
-
+    prev = {(r_start, c_start): (-1, -1)}
     que = [(r_start, c_start, 0)]
     visited = {(r_start, c_start)}
     move_list = [(2, -1), (2, 1), (-2, 1), (-2, -1),
@@ -15,7 +15,7 @@ def solve(size, r_start, c_start, r_end, c_end):
     while len(que) != 0:
         node_r, node_c, depth = que.pop(0)
         if node_c == c_end and node_r == r_end:
-            return depth
+            return depth, prev
         for mr, mc in move_list:
             new_r = node_r+mr
             new_c = node_c+mc
@@ -23,6 +23,8 @@ def solve(size, r_start, c_start, r_end, c_end):
                 continue
             if (new_r, new_c) in visited:
                 continue
+            visited.add(((new_r, new_c)))
+            prev[(new_r, new_c)] = (node_r, node_c)
             que.append((new_r, new_c, depth+1))
     return -1
 
@@ -35,8 +37,21 @@ def read_input(path):
         return (size, r_start, c_start, r_end, c_end)
 
 
-if __name__ == '__main__':
+def main():
     path = 'input.txt'
-    num = solve(*read_input(path))
+    size, r_start, c_start, r_end, c_end = read_input(path)
+    num, prev = solve(size, r_start, c_start, r_end, c_end)
+    tail = (r_end, c_end)
+    path = []
+    while tail != (-1, -1):
+        path.append(tail)
+        # print(tail)
+        tail = prev[tail]
+    path.reverse()
+    print(path)
     with open('output.txt', 'w') as file:
         file.write(str(num)+'\n')
+
+
+if __name__ == '__main__':
+    main()
