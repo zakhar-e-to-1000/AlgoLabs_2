@@ -10,20 +10,24 @@ def right_child(index):
     return index*2+2
 
 
-class Heap:
-    def __init__(self):
+class MinHeap:
+    def __init__(self, key):
         self.arr = []
+        self.key = key
 
     def insert(self, val):
         self.arr.append(val)
         i = len(self.arr)-1
         while i > 0:
             p = parent(i)
-            if self.arr[p] < self.arr[i]:
+            if self.key(self.arr[p]) > self.key(self.arr[i]):
                 self.arr[p], self.arr[i] = self.arr[i], self.arr[p]
                 i = p
             else:
                 break
+
+    def __len__(self):
+        return len(self.arr)
 
     def heap_down(self):
         i = 0
@@ -31,17 +35,18 @@ class Heap:
         r = right_child(i)
         while l < len(self.arr):
             if r >= len(self.arr):
-                if self.arr[l] > self.arr[i]:
+                if self.key(self.arr[l]) < self.key(self.arr[i]):
                     self.arr[i], self.arr[l] = self.arr[l], self.arr[i]
                     i = l
                 else:
                     break
                 continue
             else:
-                max_child = l if self.arr[l] > self.arr[r] else r
-                if self.arr[max_child] > self.arr[i]:
-                    self.arr[max_child], self.arr[i] = self.arr[i], self.arr[max_child]
-                    i = max_child
+                min_child = l if self.key(
+                    self.arr[l]) < self.key(self.arr[r]) else r
+                if self.key(self.arr[min_child]) < self.key(self.arr[i]):
+                    self.arr[min_child], self.arr[i] = self.arr[i], self.arr[min_child]
+                    i = min_child
                 else:
                     break
             r = right_child(i)
