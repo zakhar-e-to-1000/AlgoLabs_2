@@ -18,7 +18,12 @@ def solve(width: int, heights: list[int]):
     return max(prev)
 
 
-width = int(input())
-heights = [int(s) for s in input().split()]
-print(heights)
-print(solve(width, heights))
+def main():
+    width = int(input())
+    heights = [int(s) for s in input().split()]
+    print(heights)
+    print(solve(width, heights))
+
+
+if __name__ == '__main__':
+    main()
